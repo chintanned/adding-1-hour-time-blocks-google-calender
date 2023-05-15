@@ -1,0 +1,19 @@
+function createHourlyTimeBlocks() {
+  var calendarId = 'primary';  // Use 'primary' for the default calendar
+  var calendar = CalendarApp.getCalendarById(calendarId);
+  var currentDate = new Date();
+  currentDate.setHours(10, 0, 0);  // Set the initial hour to 10:00 AM
+
+  // Loop through each hour from 10 AM to 7 PM
+  while (currentDate.getHours() <= 19) {
+    var eventTitle = 'No title';
+    var eventStartTime = new Date(currentDate);
+    var eventEndTime = new Date(currentDate.getTime() + 60 * 60 * 1000);  // Add 1 hour to the start time
+
+    // Create the event
+    var event = calendar.createEvent(eventTitle, eventStartTime, eventEndTime);
+
+    // Advance to the next hour
+    currentDate.setTime(currentDate.getTime() + 60 * 60 * 1000);
+  }
+}
